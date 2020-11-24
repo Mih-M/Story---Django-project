@@ -1,0 +1,732 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+/*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*
+Document
+========
+*/
+/**
+Use a better box model (opinionated).
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+Use a more readable tab size (opinionated).
+*/
+:root {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+/**
+1. Correct the line height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+*/
+html {
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/*
+Sections
+========
+*/
+/**
+Remove the margin in all browsers.
+*/
+body {
+  margin: 0;
+}
+
+/**
+Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+*/
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/*
+Grouping content
+================
+*/
+/**
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+*/
+hr {
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+}
+
+/*
+Text-level semantics
+====================
+*/
+/**
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+abbr[title] {
+  text-decoration: underline dotted;
+}
+
+/**
+Add the correct font weight in Edge and Safari.
+*/
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+small {
+  font-size: 80%;
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+Tabular data
+============
+*/
+/**
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+table {
+  text-indent: 0;
+  /* 1 */
+  border-color: inherit;
+  /* 2 */
+}
+
+/*
+Forms
+=====
+*/
+/**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+/**
+Remove the inheritance of text transform in Edge and Firefox.
+1. Remove the inheritance of text transform in Firefox.
+*/
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+/**
+Remove the inner border and padding in Firefox.
+*/
+::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+Restore the focus styles unset by the previous rule.
+*/
+:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+Remove the additional ':invalid' styles in Firefox.
+See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737
+*/
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+legend {
+  padding: 0;
+}
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+progress {
+  vertical-align: baseline;
+}
+
+/**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+[type=search] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/*
+Interactive
+===========
+*/
+/*
+Add the correct display in Chrome and Safari.
+*/
+summary {
+  display: list-item;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  color: #3C403D;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #3C403D;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+hr {
+  color: rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+p {
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.c-nav-bar {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  padding: 30px 50px;
+  align-items: center;
+  background-color: #DADED4;
+  position: relative;
+}
+.c-nav-bar a {
+  color: #3C403D;
+  font-size: 20px;
+}
+.c-nav-bar a.c-sing-in {
+  border: 3px solid #39603D;
+  padding: 5px 10px;
+  color: #39603D;
+}
+.c-nav-bar a.c-sing-up {
+  border: 3px solid #47294F;
+  padding: 5px 10px;
+  color: #47294F;
+}
+
+.c-logo {
+  display: flex;
+  flex-flow: row wrap;
+}
+.c-logo h2 {
+  font-family: "Fredericka the Great", cursive;
+  color: #47294F;
+  transform: rotate(-20deg);
+}
+
+.c-nav {
+  justify-self: flex-end;
+}
+
+.c-nav__list {
+  display: grid;
+  grid-template-columns: max-content max-content max-content max-content max-content;
+  column-gap: 35px;
+}
+
+.c-nav__list-item:hover {
+  transform: scale(1.2);
+}
+
+.c-top-page {
+  position: relative;
+}
+
+.c-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 20px;
+  background-color: #3C403D;
+  color: white;
+  border: 3px solid #3C403D;
+  width: max-content;
+}
+.c-btn:hover {
+  background-color: inherit;
+  color: #3C403D;
+  cursor: pointer;
+}
+
+.c-btn--violet {
+  background-color: #47294F;
+  border-color: #47294F;
+}
+.c-btn--violet:hover {
+  color: #47294F;
+}
+
+.c-btn--light {
+  color: #3C403D;
+  background-color: inherit;
+}
+
+.c-btn--green {
+  background-color: #39603D;
+  border-color: #39603D;
+}
+.c-btn--green:hover {
+  color: #39603D;
+}
+
+.c-page-background {
+  background-color: #ECEEE8;
+  min-height: 100vh;
+}
+
+.c-top-section-wrapper {
+  border: 10px solid white;
+  background: url("../../images/book_long.jpg");
+  box-shadow: 0 0 20px 2px gray;
+  margin-bottom: 50px;
+  position: relative;
+}
+.c-top-section-wrapper::before {
+  content: "";
+  background-color: rgba(218, 222, 212, 0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.c-page-content {
+  padding-bottom: 100px;
+}
+
+.c-col-text-wrapper {
+  text-align: center;
+  margin: 50px 0;
+  flex: 1 1 50%;
+}
+.c-col-text-wrapper h2 {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.c-green h2::before {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #39603D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.c-violet h2::before {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #47294F;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.c-row-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.c-link-underlined {
+  font-size: 18px;
+  font-style: italic;
+  text-decoration: underline;
+  color: #47294F;
+}
+.c-link-underlined:hover {
+  color: #39603D;
+}
+
+.c-stories-section {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.c-stories-section > header {
+  margin: 50px;
+}
+.c-stories-section h2 {
+  text-align: center;
+  margin: 50px 0;
+  text-transform: uppercase;
+  word-spacing: 5px;
+  letter-spacing: 2px;
+  position: relative;
+}
+.c-stories-section h2::before {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #3C403D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.c-stories-wrapper {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.c-story-card--small {
+  display: grid;
+  grid-template-rows: 250px 1fr 2fr;
+  background-color: white;
+  height: 600px;
+  box-shadow: 5px 10px 15px 1px gray;
+  margin-bottom: 50px;
+}
+
+.c-story-card--big {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 0 auto;
+  background-color: white;
+  width: 70%;
+  box-shadow: 5px 10px 15px 1px gray;
+}
+
+.c-story-pic-wrapper {
+  overflow: hidden;
+}
+
+.c-story-pic-wrapper--big {
+  height: 600px;
+  width: 100%;
+}
+
+.c-title-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.c-title-wrapper::before {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background-color: #3C403D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0;
+  top: -20px;
+}
+.c-title-wrapper a {
+  max-width: 85%;
+}
+.c-title-wrapper h3 {
+  text-align: center;
+  line-height: 40px;
+  color: #3C403D;
+}
+
+.c-story-text-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  position: relative;
+  top: -200px;
+  background-color: white;
+  width: 70%;
+}
+.c-story-text-wrapper h2 {
+  margin: 50px 0 100px 0;
+  position: relative;
+}
+.c-story-text-wrapper h2::before {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background-color: #3C403D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.c-story-text {
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+.c-likes-wrapper {
+  width: 70%;
+  justify-self: stretch;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  column-gap: 50px;
+  align-items: center;
+  padding: 20px 0;
+}
+.c-likes-wrapper .fa {
+  font-size: 30px;
+  position: relative;
+}
+.c-likes-wrapper .fa:hover {
+  cursor: pointer;
+}
+.c-likes-wrapper .fa-heart {
+  color: #39603D;
+}
+.c-likes-wrapper .fa-heart:hover::after {
+  content: "Add to favorites";
+  padding: 5px;
+  background-color: #3C403D;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.c-likes-wrapper .fa-thumbs-up:hover::after {
+  content: "Like";
+  padding: 5px;
+  background-color: #3C403D;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.c-likes-wrapper p {
+  margin: 0;
+}
+
+.c-story-writer-info {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.c-story-writer-info img {
+  margin-right: 20px;
+  clip-path: circle();
+  width: 70px;
+  height: 70px;
+}
+
+.c-story-writer-info-left {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.c-story-category {
+  color: gray;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.c-story-buttons-wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 20px;
+  padding: 50px;
+}
+.c-story-buttons-wrapper a.c-btn {
+  width: max-content;
+}
+
+.c-form {
+  display: grid;
+  row-gap: 20px;
+  background-color: white;
+  box-shadow: 5px 10px 15px 1px gray;
+  width: 400px;
+  margin: 50px auto;
+  padding: 50px;
+}
+.c-form label {
+  font-size: 18px;
+}
+.c-form button {
+  align-self: center;
+}
+.c-form ul {
+  color: red;
+}
+.c-form p {
+  font-size: 15px;
+}
+.c-form p a {
+  color: #47294F;
+  font-style: italic;
+}
+.c-form p a:hover {
+  color: #39603D;
+}
+.c-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Fredericka the Great", cursive;
+}
+.c-form img {
+  width: 50px;
+}
+
+.c-form__item {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.c-form--long {
+  width: 800px;
+}
+
+/*# sourceMappingURL=common-styles.css.map */

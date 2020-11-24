@@ -1,0 +1,64 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+
+.c-comments-section-wrapper {
+  @include flex_col;
+  align-items: center;
+  margin: 50px 0;
+  padding: 50px 0;
+  background-color: $tanly;
+
+
+  h3 {
+    @include upper_letters;
+    margin-bottom: 50px;
+  }
+
+  form {
+    @include flex_col;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 600px;
+      height: 50px;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+.c-comments-wrapper {
+  @include flex_col;
+  margin-top: 100px;
+  width: 600px;
+}
+
+.c-comment {
+  @include flex_row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.c-comment-pic-wrapper {
+  flex: 1 1 20%;
+
+  img {
+    clip-path: circle();
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.c-comment-content-wrapper {
+  @include flex_col;
+  flex: 1 1 80%;
+  padding-left: 20px;
+}
+
+.c-comment-top-wrapper {
+  @include flex_row;
+  justify-content: space-between;
+}
+
+

@@ -1,0 +1,64 @@
+.c-profile-info-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+.c-profile-info-wrapper h1 {
+  font-family: "Fredericka the Great", cursive;
+  font-size: 50px;
+  margin-bottom: 30px;
+  color: black;
+}
+.c-profile-info-wrapper h2 {
+  margin-bottom: 50px;
+}
+
+.c-profile-pic-wrapper {
+  text-align: center;
+}
+.c-profile-pic-wrapper img {
+  clip-path: circle();
+  width: 300px;
+  height: 300px;
+}
+
+.c-stories-section .c-subheading {
+  margin-bottom: 50px;
+  position: relative;
+}
+.c-stories-section .c-subheading::before {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #3C403D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  left: 0;
+  transform: translate(0);
+}
+.c-stories-section footer {
+  text-align: end;
+  margin-top: 30px;
+}
+.c-stories-section footer a {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.c-stories-section footer a:hover {
+  text-decoration: underline;
+}
+
+.c-profile-buttons-wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  column-gap: 20px;
+  justify-content: end;
+  padding: 50px;
+}
+.c-profile-buttons-wrapper a.c-btn {
+  width: max-content;
+}
+
+/*# sourceMappingURL=profile-styles.css.map */

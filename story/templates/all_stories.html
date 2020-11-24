@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-styles %}
+    <link rel="stylesheet" href="{% static 'CSS/styles/all-stories-styles.css' %}">
+{% endblock %}
+
+{% block page-script %}
+    <script src="{% static 'scripts/all_stories_script.js' %}"></script>
+{% endblock %}
+
+{% block top_page_content %}
+    <section class="c-categories-container">
+        <h2>Categories</h2>
+        <div class="c-categories-wrapper">
+            {% for category in categories %}
+            <button class="c-btn">{{ category }}</button>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="c-categories-container">
+        <h2>Writers</h2>
+        <div class="c-categories-wrapper">
+            {% for writer in writers %}
+            <button class="c-btn">{{ writer.full_name }}</button>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="c-stories-section">
+        <header>
+            <h2>All stories</h2>
+        </header>
+
+        {% include 'parts/stories.html' with stories=stories %}
+
+    </div>
+
+{% endblock %}
+
+{% block page-script-function %}
+    <script>
+        show_category();
+    </script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-styles %}
+    <link rel="stylesheet" href="{% static 'CSS/styles/profile-styles.css' %}">
+{% endblock %}
+
+{% block top_page_content %}
+    <section class="c-profile-info-wrapper">
+        <header class="c-profile-pic-wrapper">
+            <img src="{{ user_profile.profile_picture.url }}" alt="">
+        </header>
+        {% if is_writer %}
+            <main class="c-profile-info-wrapper">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h2>Writer</h2>
+            </main>
+        {% else %}
+            <main class="c-profile-info-wrapper">
+                {% if user.first_name or user.last_name %}
+                    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                {% else %}
+                    <h1>{{ user.username }}</h1>
+                {% endif %}
+            </main>
+        {% endif %}
+    </section>
+
+    <section class="c-profile-buttons-wrapper">
+        {% if is_writer %}
+            <a href="{% url 'add_story' %}" class="c-btn">Add a story</a>
+        {% endif %}
+        <a href="" class="c-btn">Edit profile</a>
+        <a href="" class="c-btn">Delete profile</a>
+    </section>
+
+{% endblock %}
+
+{% block page_content %}
+    {% if is_writer %}
+
+        <div class="c-stories-section">
+
+            <header>
+                <h2>My stories</h2>
+            </header>
+
+            <h3 class="c-subheading">Unpublished</h3>
+
+            {% include 'parts/stories.html' with stories=unpublished_stories %}
+
+            <footer><a href="{% url 'custom_stories' user.username|slugify 'unpublished-stories' %}">Show all</a></footer>
+
+            <h3 class="c-subheading">Published</h3>
+
+            {% include 'parts/stories.html' with stories=my_stories %}
+
+            <footer><a href="{% url 'custom_stories' user.username|slugify 'my-stories' %}">Show all</a></footer>
+        </div>
+    {% endif %}
+
+    <div class="c-stories-section">
+        <header>
+            <h2>Favorite stories</h2>
+        </header>
+
+        {% include 'parts/stories.html' %}
+
+        <footer><a href="">Show all</a></footer>
+    </div>
+
+
+{% endblock %}

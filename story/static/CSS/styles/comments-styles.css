@@ -1,0 +1,63 @@
+.c-comments-section-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 50px 0;
+  padding: 50px 0;
+  background-color: #DADED4;
+}
+.c-comments-section-wrapper h3 {
+  text-transform: uppercase;
+  word-spacing: 5px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+.c-comments-section-wrapper form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.c-comments-section-wrapper form input {
+  width: 600px;
+  height: 50px;
+  margin-bottom: 25px;
+}
+
+.c-comments-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 100px;
+  width: 600px;
+}
+
+.c-comment {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.c-comment-pic-wrapper {
+  flex: 1 1 20%;
+}
+.c-comment-pic-wrapper img {
+  clip-path: circle();
+  width: 100px;
+  height: 100px;
+}
+
+.c-comment-content-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 1 1 80%;
+  padding-left: 20px;
+}
+
+.c-comment-top-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=comments-styles.css.map */

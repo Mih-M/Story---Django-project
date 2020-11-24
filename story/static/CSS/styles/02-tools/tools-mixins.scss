@@ -1,0 +1,47 @@
+@import '../01-settings/settings-colors';
+
+@mixin flex_row() {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@mixin flex_col() {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+@mixin wrapper_centered() {
+  text-align: center;
+  margin: 50px 0;
+}
+
+@mixin upper_letters() {
+  text-transform: uppercase;
+  word-spacing: 5px;
+  letter-spacing: 2px;
+}
+
+@mixin under_line_before_el($color: $brown_grey, $width: 100px) {
+  content: '';
+  width: $width;
+  height: 3px;
+  background-color: $color;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin comment($content: '') {
+  content: $content;
+  padding: 5px;
+  background-color: $brown_grey;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}

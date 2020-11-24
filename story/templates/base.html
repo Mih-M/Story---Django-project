@@ -1,0 +1,66 @@
+{% load static %}
+{% load group_filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Story - best short stories</title>
+    {#    <link rel="shortcut icon" href="{% static '' %}" type="image/png">#}
+    <link rel="stylesheet" href="{% static 'CSS/styles/common-styles.css' %}">
+    {% block page-styles %} {% endblock %}
+    {% block page-script %} {% endblock %}
+</head>
+<body>
+<div class="c-page-background">
+    <div class="c-top-section-wrapper">
+
+        <header class="c-nav-bar">
+
+            <div class="c-logo">
+                <h2>Story</h2>
+            </div>
+
+            <nav class="c-nav">
+                <ul class="c-nav__list c-links">
+                    <li class="c-nav__list-item"><a href="/">Home</a></li>
+                    <li class="c-nav__list-item"><a href="{% url 'all_stories' %}">All stories</a></li>
+                    {% if not request.user|has_group:'Writer' and not user.is_superuser %}
+                        <li class="c-nav__list-item"><a href="{% url 'become_a_writer' %}">Become a writer</a></li>
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                        <li class="c-nav__list-item"><a class="c-sing-in" href="{% url 'sing_in' %}">Sign In</a></li>
+                        <li class="c-nav__list-item"><a class="c-sing-up" href="{% url 'sing_up' %}">Sign Up</a></li>
+                    {% else %}
+                        {% if user.is_superuser %}
+                            <li class="c-nav__list-item"><a class="c-sing-up"
+                                                            href="{% url 'su_profile' %}">
+                                Hello, {{ user.username }}</a></li>
+                        {% else %}
+                            <li class="c-nav__list-item"><a class="c-sing-up"
+                                                            href="{% url 'profile' user.username|slugify %}">
+                                Hello, {{ user.username }}</a></li>
+                        {% endif %}
+                        <li class="c-nav__list-item"><a class="c-sing-up" href="{% url 'sing_out' %}">Sign Out</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </header>
+
+        <section class="c-top-page">
+            {% block top_page_content %}
+            {% endblock %}
+        </section>
+
+    </div>
+
+    <main class="c-page-content">
+        {% block page_content %}
+        {% endblock %}
+    </main>
+</div>
+
+{% block page-script-function %} {% endblock %}
+</body>
+</html>

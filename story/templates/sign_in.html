@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+    <form class="c-form" method="post" action="{% url 'sing_in' %}">
+        <h2>Sing in to Story</h2>
+
+        <div class="c-form__item">
+            <label for="{{ sign_in_form.username.id_for_label }}">Username</label>
+            {{ sign_in_form.username }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ sign_in_form.password.id_for_label }}">Password</label>
+            {{ sign_in_form.password }}
+        </div>
+
+        <ul class="c-form__item">
+            <li>{{ error_message }}</li>
+        </ul>
+
+        <div class="c-form__item">
+            <button class="c-btn">Sign In</button>
+            {% csrf_token %}
+        </div>
+
+        <p>Do not have an account? <a href="{% url 'sing_up' %}"> Sing Up here</a></p>
+    </form>
+{% endblock %}

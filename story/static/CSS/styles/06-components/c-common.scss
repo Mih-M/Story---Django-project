@@ -1,0 +1,101 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+.c-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 20px;
+  background-color: $brown_grey;
+  color: white;
+  border: 3px solid $brown_grey;
+  width: max-content;
+
+  &:hover {
+    background-color: inherit;
+    color: $brown_grey;
+    cursor: pointer;
+  }
+}
+
+.c-btn--violet {
+  background-color: $violet;
+  border-color: $violet;
+
+  &:hover {
+    color: $violet;
+  }
+}
+
+.c-btn--light {
+  color: $brown_grey;
+  background-color: inherit;
+}
+
+.c-btn--green {
+  background-color: $green_leaf;
+  border-color: $green_leaf;
+
+  &:hover {
+    color: $green_leaf;
+  }
+}
+
+.c-page-background {
+  background-color: $tanly_light;
+  min-height: 100vh;
+}
+
+.c-top-section-wrapper {
+  border: 10px solid white;
+  background: url("../../images/book_long.jpg");
+  box-shadow: 0 0 20px 2px gray;
+  margin-bottom: 50px;
+  position: relative;
+
+  &::before {
+    content: '';
+    background-color: rgba(218, 222, 212, .7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}
+
+.c-page-content {
+  padding-bottom: 100px;
+}
+
+.c-col-text-wrapper {
+  @include wrapper_centered;
+  flex: 1 1 50%;
+
+  h2 {
+    margin-bottom: 50px;
+    position: relative;
+  }
+}
+
+.c-green h2::before {
+  @include under_line_before_el($green_leaf)
+}
+
+.c-violet h2::before {
+  @include under_line_before_el($violet)
+}
+
+.c-row-wrapper {
+  @include flex_row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.c-link-underlined {
+  font-size: 18px;
+  font-style: italic;
+  text-decoration: underline;
+  color: $violet;
+
+  &:hover {
+    color: $green_leaf;
+  }
+}

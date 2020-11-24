@@ -1,0 +1,21 @@
+@import "../02-tools/tools-mixins";
+@import '../01-settings/settings-colors';
+
+.c-welcome-wrapper {
+  @include wrapper_centered;
+  margin: 30px 0 100px 0;
+  color: black;
+
+  h1 {
+    font-family: 'Fredericka the Great', cursive;
+  }
+
+  h4 {
+    margin-bottom: 50px;
+    position: relative;
+
+    &::before {
+      @include under_line_before_el();
+    }
+  }
+}

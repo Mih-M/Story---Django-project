@@ -1,0 +1,175 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+.c-stories-section {
+  @include flex_col;
+  align-content: center;
+
+  & > header {
+    margin: 50px;
+  }
+
+  h2 {
+    @include wrapper_centered;
+    @include upper_letters;
+    position: relative;
+
+    &::before {
+      @include under_line_before_el();
+    }
+  }
+}
+
+.c-stories-wrapper {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: space-between;
+  width: 80%;
+}
+
+
+.c-story-card--small {
+  display: grid;
+  grid-template-rows: 250px 1fr 2fr;
+  background-color: white;
+  height: 600px;
+  box-shadow: 5px 10px 15px 1px gray;
+  margin-bottom: 50px;
+}
+
+.c-story-card--big {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 0 auto;
+  background-color: white;
+  width: 70%;
+  box-shadow: 5px 10px 15px 1px gray;
+}
+
+.c-story-pic-wrapper {
+  overflow: hidden;
+}
+
+.c-story-pic-wrapper--big {
+  height: 600px;
+  width: 100%;
+}
+
+.c-title-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &::before {
+    @include under_line_before_el($width: 50px);
+    bottom: 0;
+    top: -20px;
+  }
+
+  a {
+    max-width: 85%;
+  }
+
+  h3 {
+    text-align: center;
+    line-height: 40px;
+    color: $brown_grey;
+  }
+}
+
+.c-story-text-wrapper {
+  @include flex_col;
+  align-items: center;
+  position: relative;
+  top: -200px;
+  background-color: white;
+  width: 70%;
+
+  h2 {
+    margin: 50px 0 100px 0;
+    position: relative;
+
+    &::before {
+      @include under_line_before_el($width: 50px);
+    }
+  }
+}
+
+.c-story-text {
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+.c-likes-wrapper {
+  width: 70%;
+  justify-self: stretch;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  column-gap: 50px;
+  align-items: center;
+  padding: 20px 0;
+
+  .fa {
+    font-size: 30px;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .fa-heart {
+    color: $green_leaf;
+
+    &:hover::after {
+      @include comment('Add to favorites')
+    }
+  }
+
+  .fa-thumbs-up {
+    &:hover::after {
+      @include comment('Like')
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.c-story-writer-info {
+  @include flex_row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  img {
+    margin-right: 20px;
+    clip-path: circle();
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.c-story-writer-info-left {
+  @include flex_row;
+  align-items: center;
+}
+
+.c-story-category {
+  color: gray;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.c-story-buttons-wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 20px;
+  padding: 50px;
+
+  a.c-btn {
+    width: max-content;
+  }
+}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-styles %}
+    <link rel="stylesheet" href="{% static 'CSS/styles/profile-styles.css' %}">
+{% endblock %}
+
+{% block top_page_content %}
+    <section class="c-profile-info-wrapper">
+        <header class="c-profile-pic-wrapper">
+            <img src="{{ user_profile.profile_picture.url }}" alt="">
+        </header>
+
+        <main class="c-profile-info-wrapper">
+            {% if user.first_name or user.last_name %}
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            {% else %}
+                <h1>{{ user.username }}</h1>
+            {% endif %}
+            <h2>Editor</h2>
+        </main>
+
+    </section>
+
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="c-stories-section">
+
+        <header>
+            <h2>New stories</h2>
+        </header>
+
+        {% include 'parts/stories.html' with stories=new_stories %}
+
+    </div>
+
+
+    <div class="c-stories-section">
+        <header>
+            <h2>New writers</h2>
+        </header>
+
+        {% include 'parts/new_writers.html' with writers=new_writers %}
+
+    </div>
+
+
+{% endblock %}

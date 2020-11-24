@@ -1,0 +1,67 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+.c-profile-info-wrapper {
+  @include flex_col;
+  align-items: center;
+
+  h1 {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 50px;
+    margin-bottom: 30px;
+    color: black;
+  }
+
+  h2 {
+    margin-bottom: 50px;
+  }
+}
+
+.c-profile-pic-wrapper {
+  text-align: center;
+
+  img {
+    clip-path: circle();
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.c-stories-section {
+  .c-subheading {
+    margin-bottom: 50px;
+    position: relative;
+
+    &::before {
+      @include under_line_before_el();
+      left: 0;
+      transform: translate(0);
+    }
+  }
+
+  footer {
+    text-align: end;
+    margin-top: 30px;
+
+    a {
+      margin-right: 10px;
+      font-size: 20px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.c-profile-buttons-wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  column-gap: 20px;
+  justify-content: end;
+  padding: 50px;
+
+  a.c-btn {
+    width: max-content;
+  }
+}

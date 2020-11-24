@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <form class="c-form" method="post" action="{% url 'sing_up' %}">
+        <h2>Create an account</h2>
+
+        <div class="c-form__item">
+            <label for="{{ sign_up_form.username.id_for_label }}">Username</label>
+            {{ sign_up_form.username }}
+            {{ sign_up_form.username.errors }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ sign_up_form.email.id_for_label }}">Email</label>
+            {{ sign_up_form.email }}
+            {{ sign_up_form.email.errors }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ sign_up_form.password1.id_for_label }}">Password</label>
+            {{ sign_up_form.password1 }}
+            {{ sign_up_form.password1.errors }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ sign_up_form.password2.id_for_label }}">Confirm password</label>
+            {{ sign_up_form.password2 }}
+            {{ sign_up_form.password2.errors }}
+        </div>
+
+        <div class="c-form__item">
+            <button class="c-btn">Sign Up</button>
+            {% csrf_token %}
+        </div>
+
+        <p>Already have an account? <a href="{% url 'sing_in' %}"> Sing In here</a></p>
+    </form>
+{% endblock %}

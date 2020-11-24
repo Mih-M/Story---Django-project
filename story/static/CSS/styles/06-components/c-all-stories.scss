@@ -1,0 +1,19 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+.c-categories-container {
+  margin: 50px;
+
+  h2 {
+    font-family: 'Fredericka the Great', cursive;
+    color: black;
+    margin-bottom: 30px;
+    font-size: 35px;
+  }
+}
+
+.c-categories-wrapper {
+  button {
+    margin-right: 20px;
+  }
+}

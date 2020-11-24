@@ -1,0 +1,15 @@
+.c-categories-container {
+  margin: 50px;
+}
+.c-categories-container h2 {
+  font-family: "Fredericka the Great", cursive;
+  color: black;
+  margin-bottom: 30px;
+  font-size: 35px;
+}
+
+.c-categories-wrapper button {
+  margin-right: 20px;
+}
+
+/*# sourceMappingURL=all-stories-styles.css.map */

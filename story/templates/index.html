@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-styles %}
+    <link rel="stylesheet" href="{% static 'CSS/styles/index-styles.css' %}">
+{% endblock %}
+
+{% block top_page_content %}
+
+    <section class="c-welcome-wrapper">
+        <h1>Story</h1>
+        <h4>Best short stories collected for you!</h4>
+        <a href="{% url 'all_stories' %}" class="c-btn">Show stories</a>
+    </section>
+
+{% endblock %}
+
+{% block page_content %}
+
+    {% if user.is_authenticated %}
+        {% include 'parts/welcome_profile.html' with stories=latest_stories %}
+    {% else %}
+        {% include 'parts/welcome_no_profile.html' %}
+    {% endif %}
+
+{% endblock %}
+

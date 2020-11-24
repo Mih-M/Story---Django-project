@@ -1,0 +1,56 @@
+@import '../01-settings/settings-colors';
+@import "../02-tools/tools-mixins";
+
+.c-form {
+  display: grid;
+  row-gap: 20px;
+  background-color: white;
+  box-shadow: 5px 10px 15px 1px gray;
+  width: 400px;
+  margin: 50px auto;
+  padding: 50px;
+
+  label {
+    font-size: 18px;
+  }
+
+  button {
+    align-self: center;
+  }
+
+  ul {
+    color: red;
+  }
+
+  p {
+    font-size: 15px;
+
+    a {
+      color: $violet;
+      font-style: italic;
+
+      &:hover {
+        color: $green_leaf;
+      }
+    }
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Fredericka the Great", cursive;;
+  }
+
+  img {
+    width: 50px;
+  }
+}
+
+.c-form__item {
+  @include flex_col;
+}
+
+.c-form--long {
+  width: 800px;
+}
+

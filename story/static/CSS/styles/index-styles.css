@@ -1,0 +1,25 @@
+.c-welcome-wrapper {
+  text-align: center;
+  margin: 50px 0;
+  margin: 30px 0 100px 0;
+  color: black;
+}
+.c-welcome-wrapper h1 {
+  font-family: "Fredericka the Great", cursive;
+}
+.c-welcome-wrapper h4 {
+  margin-bottom: 50px;
+  position: relative;
+}
+.c-welcome-wrapper h4::before {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #3C403D;
+  position: absolute;
+  bottom: -70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*# sourceMappingURL=index-styles.css.map */

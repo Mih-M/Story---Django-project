@@ -1,0 +1,54 @@
+@import '../01-settings/settings-colors';
+@import '../02-tools/tools-mixins';
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: $brown_grey;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $brown_grey;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+hr {
+  color: rgba(0, 0, 0, .1);
+  margin: 20px 0;
+}
+
+p {
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+

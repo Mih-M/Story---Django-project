@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <form class="c-form c-form--long" method="post" action="{% url 'add_story' %}" enctype="multipart/form-data">
+        <h2>Add new story</h2>
+
+        <div class="c-form__item">
+            <label for="{{ story_form.title.id_for_label }}">Title</label>
+            {{ story_form.title }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ story_form.category.id_for_label }}">Category</label>
+            {{ story_form.category }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ story_form.image.id_for_label }}">Image</label>
+            {{ story_form.image }}
+        </div>
+
+         <div class="c-form__item">
+            <label for="{{ story_form.content.id_for_label }}">Content</label>
+            {{ story_form.content }}
+        </div>
+
+        <div class="c-form__item">
+            <button class="c-btn">Add story</button>
+            {% csrf_token %}
+        </div>
+    </form>
+{% endblock %}
