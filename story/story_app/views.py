@@ -1,8 +1,10 @@
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 
-from story_app.forms import StoryForm
+from story_app.forms import StoryForm, CommentForm
 from story_app.models import Story
 from story_auth.models import Writer
 from story_common.decorators import group_required
@@ -67,11 +69,14 @@ def story_details(request, pk, story_title):
         return redirect('home')
 
     paragraphs = story.content.split('\n')
+
     context = {
         'story': story,
         'paragraphs': paragraphs,
         'is_published': is_published,
         'is_owner': is_owner,
+        'comment_form': CommentForm(),
+        'comments': story.comment_set.all(),
     }
     return render(request, 'story_details.html', context)
 
@@ -128,9 +133,12 @@ def edit_story(request, story_pk, story_title):
 
         return render(request, 'edit_story.html', context)
     else:
+        old_photo = story.image
         story_form = StoryForm(request.POST, request.FILES, instance=story)
 
         if story_form.is_valid():
+            if story_form.cleaned_data['image'] != old_photo:
+                os.remove(old_photo.path)
             story_form.save()
             story.published = False
             story.save()
@@ -172,3 +180,24 @@ def approve_story(request, story_pk):
         story.save()
 
         return redirect('su_profile')
+
+
+@login_required()
+def add_comment(request, story_pk):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+
+        story = Story.objects.get(pk=story_pk)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.story = story
+            comment.author = request.user.userprofile
+            comment.save()
+
+            return redirect('story_details', story_pk, slugify(story.title))
+
+        context = {
+            'comment_form': comment_form,
+        }
+        return render(request, 'story_details.html', context)

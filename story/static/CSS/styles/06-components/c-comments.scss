@@ -15,6 +15,10 @@
     margin-bottom: 50px;
   }
 
+  h4 {
+    @include wrapper_centered;
+  }
+
   form {
     @include flex_col;
     justify-content: center;

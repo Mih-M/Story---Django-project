@@ -1,6 +1,6 @@
 from django.db import models
 
-from story_auth.models import Writer
+from story_auth.models import Writer, UserProfile
 
 
 class Story(models.Model):
@@ -37,3 +37,11 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.story}'
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    content = models.TextField(max_length=500)
+    date = models.DateField(auto_now_add=True)
+

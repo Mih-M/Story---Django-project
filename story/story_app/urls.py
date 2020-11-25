@@ -1,7 +1,7 @@
 from django.urls import path
 
 from story_app.views import home, all_stories, story_details, add_story, writers_profile, custom_stories, edit_story, \
-    approve_story, delete_story
+    approve_story, delete_story, add_comment
 
 urlpatterns = [
     path('', home, name='home'),
@@ -13,4 +13,5 @@ urlpatterns = [
     path('edit_story/<int:story_pk>/<slug:story_title>', edit_story, name='edit_story'),
     path('delete_story/<int:story_pk>/<slug:story_title>', delete_story, name='delete_story'),
     path('approve_story/<int:story_pk>/', approve_story, name='approve_story'),
+    path('add_comment/<int:story_pk>/', add_comment, name='add_comment'),
 ]

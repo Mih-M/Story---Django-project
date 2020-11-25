@@ -12,6 +12,10 @@
   letter-spacing: 2px;
   margin-bottom: 50px;
 }
+.c-comments-section-wrapper h4 {
+  text-align: center;
+  margin: 50px 0;
+}
 .c-comments-section-wrapper form {
   display: flex;
   flex-flow: column wrap;
