@@ -1,7 +1,9 @@
 from django.shortcuts import redirect
 
 
-def group_required(groups=[]):
+def group_required(groups=None):
+    if groups is None:
+        groups = []
     groups_set = set(groups)
 
     def decorator(view_func):

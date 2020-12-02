@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <form class="c-form c-form--long" method="post" action="{% url 'delete_profile'  user.username|slugify %}">
+        <div class="c-form__item">
+            <h2>Are you sure you want to delete</h2>
+            <h2> you account for Story? </h2>
+        </div>
+
+        <div class="c-form__item">
+            <button class="c-btn">Delete account</button>
+            <a class="c-link-underlined" href="javascript:history.back()">No, go back</a>
+            {% csrf_token %}
+        </div>
+    </form>
+{% endblock %}

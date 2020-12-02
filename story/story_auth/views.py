@@ -1,13 +1,16 @@
+import os
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.db import transaction
 from django.shortcuts import render, redirect
+from django.template.defaultfilters import slugify
 
 from story_app.models import Story
-from story_auth.forms import SignUpForm, SignInForm, BecomeAWriterForm
+from story_auth.forms import SignUpForm, SignInForm, BecomeAWriterForm, EditProfileForm
 from story_auth.models import UserProfile, Writer
-from story_common.decorators import group_required
+from story_core.decorators import group_required
 
 
 @transaction.atomic()
@@ -75,20 +78,70 @@ def profile(request, username):
     is_writer = user.groups.filter(name='Writer').exists()
 
     my_stories = user_profile.writer.story_set.filter(published=True).order_by('-date')[:3] if is_writer else ''
-    unpublished_stories = user_profile.writer.story_set.filter(published=False).order_by('-date')[
-                          :3] if is_writer else ''
-    favourite_stories = ''
+    unpublished_stories = user_profile.writer.story_set.filter(published=False).order_by('-date')[:3] \
+        if is_writer else ''
+    favorite_stories = user_profile.favorites.all()
 
     context = {
-        'user': user,
         'user_profile': user_profile,
         'is_writer': is_writer,
         'my_stories': my_stories,
         'unpublished_stories': unpublished_stories,
-        'favourite_stories': favourite_stories,
+        'favorite_stories': favorite_stories,
     }
 
     return render(request, 'profile.html', context)
+
+
+@transaction.atomic()
+@login_required()
+def edit_profile(request, username):
+    if request.method == 'GET':
+        form = EditProfileForm(initial={
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+        })
+
+        context = {
+            'form': form,
+        }
+
+        return render(request, 'edit_profile.html', context)
+    else:
+        old_picture = request.user.userprofile.profile_picture
+        form = EditProfileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            request.user.save()
+            if form.cleaned_data['picture']:
+                request.user.userprofile.profile_picture = form.cleaned_data['picture']
+                request.user.userprofile.save()
+                if old_picture:
+                    os.remove(old_picture.path)
+
+            return redirect('profile', slugify(request.user.username))
+
+        context = {
+            'form': form,
+        }
+
+        return render(request, 'edit_profile.html', context)
+
+
+@login_required()
+def delete_profile(request, username):
+    if request.method == 'GET':
+        return render(request, 'delete_profile.html')
+    else:
+        profile_picture = request.user.userprofile.profile_picture
+
+        if profile_picture:
+            os.remove(profile_picture.path)
+
+        request.user.delete()
+        return redirect('home')
 
 
 @group_required()
@@ -147,9 +200,9 @@ def become_a_writer(request):
 
 
 @group_required()
-def approve_writer(request, pk):
+def approve_writer(request, writer_pk):
     if request.method == 'POST':
-        writer = Writer.objects.get(pk=pk)
+        writer = Writer.objects.get(pk=writer_pk)
         writer.approved = True
         writer.save()
 

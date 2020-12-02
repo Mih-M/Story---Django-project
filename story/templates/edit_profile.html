@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+    <form class="c-form" method="post" action="{% url 'edit_profile' user.username|slugify %}"
+          enctype="multipart/form-data">
+        <h2>Edit your profile</h2>
+
+        <div class="c-form__item">
+            <label for="{{ form.first_name.id_for_label }}">First name</label>
+            {{ form.first_name }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ form.last_name.id_for_label }}">Last name</label>
+            {{ form.last_name }}
+        </div>
+
+        <div class="c-form__item">
+            <label for="{{ form.picture.id_for_label }}">Profile picture</label>
+            Current:
+            {% if user.userprofile.profile_picture %}
+                <img src="{{ user.userprofile.profile_picture.url }}"
+                     alt="{{ user.userprofile.user.username }}'s profile-picture">
+            {% else %}
+                <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
+            {% endif %}
+
+            Change:
+            {{ form.picture }}
+            
+        </div>
+
+        <ul class="c-form__item">
+            <li>{{ form.errors }}</li>
+        </ul>
+
+        <div class="c-form__item">
+            <button class="c-btn">Save</button>
+            {% csrf_token %}
+        </div>
+
+        <a class="c-link-underlined" href="{% url 'change_password' %}">Change password</a>
+
+    </form>
+{% endblock %}

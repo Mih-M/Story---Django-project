@@ -119,17 +119,31 @@
     }
   }
 
-  .fa-heart {
-    color: $green_leaf;
+  .fa-heart.not-in-favorites {
+    color: $olive;
 
     &:hover::after {
       @include comment('Add to favorites')
     }
   }
 
-  .fa-thumbs-up {
+  .fa-heart.in-favorites {
+    color: $green_leaf;
+
+    &:hover::after {
+      @include comment('Remove from favorites')
+    }
+  }
+
+  .fa-thumbs-up.not-liked {
     &:hover::after {
       @include comment('Like')
+    }
+  }
+
+  .fa-thumbs-up.liked {
+    &:hover::after {
+      @include comment('Unlike')
     }
   }
 
@@ -149,6 +163,10 @@
     clip-path: circle();
     width: 70px;
     height: 70px;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 

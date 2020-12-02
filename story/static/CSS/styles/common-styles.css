@@ -614,10 +614,10 @@ p {
 .c-likes-wrapper .fa:hover {
   cursor: pointer;
 }
-.c-likes-wrapper .fa-heart {
-  color: #39603D;
+.c-likes-wrapper .fa-heart.not-in-favorites {
+  color: #A3BCB6;
 }
-.c-likes-wrapper .fa-heart:hover::after {
+.c-likes-wrapper .fa-heart.not-in-favorites:hover::after {
   content: "Add to favorites";
   padding: 5px;
   background-color: #3C403D;
@@ -630,8 +630,37 @@ p {
   transform: translateX(-50%);
   width: max-content;
 }
-.c-likes-wrapper .fa-thumbs-up:hover::after {
+.c-likes-wrapper .fa-heart.in-favorites {
+  color: #39603D;
+}
+.c-likes-wrapper .fa-heart.in-favorites:hover::after {
+  content: "Remove from favorites";
+  padding: 5px;
+  background-color: #3C403D;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.c-likes-wrapper .fa-thumbs-up.not-liked:hover::after {
   content: "Like";
+  padding: 5px;
+  background-color: #3C403D;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.c-likes-wrapper .fa-thumbs-up.liked:hover::after {
+  content: "Unlike";
   padding: 5px;
   background-color: #3C403D;
   color: white;
@@ -659,6 +688,9 @@ p {
   clip-path: circle();
   width: 70px;
   height: 70px;
+}
+.c-story-writer-info a:hover {
+  text-decoration: underline;
 }
 
 .c-story-writer-info-left {
@@ -705,11 +737,11 @@ p {
   font-size: 15px;
 }
 .c-form p a {
-  color: #47294F;
+  color: #39603D;
   font-style: italic;
 }
 .c-form p a:hover {
-  color: #39603D;
+  text-decoration: underline;
 }
 .c-form h2 {
   text-align: center;

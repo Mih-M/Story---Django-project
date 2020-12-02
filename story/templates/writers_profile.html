@@ -9,7 +9,11 @@
 
     <section class="c-profile-info-wrapper">
         <header class="c-profile-pic-wrapper">
-            <img src="{{ writer.user_profile.profile_picture.url }}" alt="">
+            {% if writer.user_profile.profile_picture %}
+                <img src="{{ writer.user_profile.profile_picture.url }}" alt="">
+            {% else %}
+                <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
+            {% endif %}
         </header>
 
         <main class="c-profile-info-wrapper">

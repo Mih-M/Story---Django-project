@@ -26,3 +26,12 @@ class BecomeAWriterForm(forms.Form):
     last_name = forms.CharField()
     picture = forms.ImageField(required=False)
 
+
+class EditProfileForm(forms.Form):
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+    picture = forms.ImageField(required=False)
+
+
+
+

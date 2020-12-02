@@ -26,11 +26,11 @@
     font-size: 15px;
 
     a {
-      color: $violet;
+      color: $green_leaf;
       font-style: italic;
 
       &:hover {
-        color: $green_leaf;
+        text-decoration: underline;
       }
     }
   }

@@ -27,16 +27,11 @@ class Story(models.Model):
     image = models.ImageField(upload_to='story_images')
     date = models.DateField(auto_now_add=True)
     published = models.BooleanField(default=False)
+    favorites = models.ManyToManyField(UserProfile, related_name='favorites', blank=True)
+    likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True)
 
     def __str__(self):
         return f'{self.title} --by {self.writer.user_profile.user.first_name} {self.writer.user_profile.user.last_name}'
-
-
-class Like(models.Model):
-    story = models.ForeignKey(Story, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.story}'
 
 
 class Comment(models.Model):
@@ -44,4 +39,7 @@ class Comment(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE)
     content = models.TextField(max_length=500)
     date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment for {self.story.title}'
 

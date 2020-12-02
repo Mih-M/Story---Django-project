@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'story_app',
     'story_auth',
-    'story_common',
 ]
 
 MIDDLEWARE = [
@@ -135,5 +134,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = '/auth/sign_in/'
+LOGIN_URL = '/auth/sign-in/'
 

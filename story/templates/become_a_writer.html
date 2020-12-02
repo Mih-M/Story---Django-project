@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block page_content %}
 
@@ -18,7 +19,13 @@
         <div class="c-form__item">
             <label for="{{ application_form.picture.id_for_label }}">Profile picture</label>
             Current:
-            <img src="{{ user.userprofile.profile_picture.url }}" alt="">
+            {% if user.userprofile.profile_picture %}
+                <img src="{{ user.userprofile.profile_picture.url }}"
+                     alt="{{ user.username }}'s profile-picture">
+            {% else %}
+                <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
+            {% endif %}
+
             Change:
             {{ application_form.picture }}
 

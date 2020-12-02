@@ -8,7 +8,11 @@
 {% block top_page_content %}
     <section class="c-profile-info-wrapper">
         <header class="c-profile-pic-wrapper">
-            <img src="{{ user_profile.profile_picture.url }}" alt="">
+            {% if user_profile.profile_picture %}
+            <img src="{{ user_profile.profile_picture.url }}" alt="{{ user_profile.user.username }}'s profile-picture">
+            {% else %}
+                <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
+            {% endif %}
         </header>
 
         <main class="c-profile-info-wrapper">

@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 from story_app.forms import StoryForm, CommentForm
 from story_app.models import Story
 from story_auth.models import Writer
-from story_common.decorators import group_required
+from story_core.decorators import group_required
 
 
 def home(request):
@@ -45,7 +45,7 @@ def custom_stories(request, username, request_stories):
             stories = user_profile.writer.story_set.filter(published=False).order_by('-date')
             header = 'My stories - unpublished'
     if request_stories == 'favorite-stories':
-        stories = ''
+        stories = user_profile.favorites.all()
         header = 'Favorite stories'
 
     categories = [' '.join(cat.split('-')).capitalize() for cat in [s.get_category_display() for s in stories]]
@@ -60,30 +60,46 @@ def custom_stories(request, username, request_stories):
     return render(request, 'custom_stories.html', context)
 
 
-def story_details(request, pk, story_title):
-    story = Story.objects.get(pk=pk)
-    is_published = story.published
-    is_owner = story.writer.user_profile == request.user.userprofile if request.user.is_authenticated else False
-
-    if not is_published and not (is_owner or request.user.is_superuser):
-        return redirect('home')
-
+def story_details(request, story_pk, story_title):
+    story = Story.objects.get(pk=story_pk)
     paragraphs = story.content.split('\n')
+    is_published = story.published
 
-    context = {
-        'story': story,
-        'paragraphs': paragraphs,
-        'is_published': is_published,
-        'is_owner': is_owner,
-        'comment_form': CommentForm(),
-        'comments': story.comment_set.all(),
-    }
+    if not request.user.is_authenticated:
+        if not is_published:
+            return redirect('home')
+
+        context = {
+            'story': story,
+            'paragraphs': paragraphs,
+            'is_published': is_published,
+        }
+
+    else:
+        is_owner = story.writer.user_profile == request.user.userprofile
+
+        if not is_published and not (is_owner or request.user.is_superuser):
+            return redirect('home')
+
+        already_liked = story in request.user.userprofile.likes.all()
+        in_favorites = story in request.user.userprofile.favorites.all()
+
+        context = {
+            'story': story,
+            'paragraphs': paragraphs,
+            'is_published': is_published,
+            'is_owner': is_owner,
+            'comment_form': CommentForm(),
+            'comments': story.comment_set.all().order_by('-date', '-id'),
+            'already_liked': already_liked,
+            'in_favorites': in_favorites,
+        }
     return render(request, 'story_details.html', context)
 
 
-def writers_profile(request, pk, writers_name):
-    writer = Writer.objects.get(pk=pk)
-    stories = writer.story_set.all()
+def writers_profile(request, writer_pk, writers_name):
+    writer = Writer.objects.get(pk=writer_pk)
+    stories = writer.story_set.filter(published=True)
 
     context = {
         'writer': writer,
@@ -201,3 +217,34 @@ def add_comment(request, story_pk):
             'comment_form': comment_form,
         }
         return render(request, 'story_details.html', context)
+
+
+@login_required()
+def like_story(request, story_pk):
+    story = Story.objects.get(pk=story_pk)
+
+    if request.user == story.writer.user_profile.user:
+        return redirect('home')
+
+    if story in request.user.userprofile.likes.all():
+        request.user.userprofile.likes.remove(story)
+    else:
+        request.user.userprofile.likes.add(story)
+
+    return redirect('story_details', story_pk, slugify(story.title))
+
+
+@login_required()
+def add_to_favorites(request, story_pk):
+    story = Story.objects.get(pk=story_pk)
+
+    if request.user == story.writer.user_profile.user:
+        return redirect('home')
+
+    if story in request.user.userprofile.favorites.all():
+        request.user.userprofile.favorites.remove(story)
+    else:
+        request.user.userprofile.favorites.add(story)
+
+    return redirect('story_details', story_pk, slugify(story.title))
+

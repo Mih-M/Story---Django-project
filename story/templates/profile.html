@@ -8,7 +8,11 @@
 {% block top_page_content %}
     <section class="c-profile-info-wrapper">
         <header class="c-profile-pic-wrapper">
-            <img src="{{ user_profile.profile_picture.url }}" alt="">
+            {% if user_profile.profile_picture %}
+            <img src="{{ user_profile.profile_picture.url }}" alt="{{ user_profile.user.username }}'s profile-picture">
+            {% else %}
+                <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
+            {% endif %}
         </header>
         {% if is_writer %}
             <main class="c-profile-info-wrapper">
@@ -30,8 +34,8 @@
         {% if is_writer %}
             <a href="{% url 'add_story' %}" class="c-btn">Add a story</a>
         {% endif %}
-        <a href="" class="c-btn">Edit profile</a>
-        <a href="" class="c-btn">Delete profile</a>
+        <a href="{% url 'edit_profile' user.username|slugify %}" class="c-btn">Edit profile</a>
+        <a href="{% url 'delete_profile' user.username|slugify %}" class="c-btn">Delete profile</a>
     </section>
 
 {% endblock %}
@@ -64,9 +68,9 @@
             <h2>Favorite stories</h2>
         </header>
 
-        {% include 'parts/stories.html' %}
+        {% include 'parts/stories.html' with stories=favorite_stories %}
 
-        <footer><a href="">Show all</a></footer>
+        <footer><a href="{% url 'custom_stories' user.username|slugify 'favorite-stories' %}">Show all</a></footer>
     </div>
 
 
