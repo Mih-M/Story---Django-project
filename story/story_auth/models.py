@@ -27,5 +27,5 @@ class Writer(models.Model):
         return f'{self.user_profile.user.last_name}'
 
     def __str__(self):
-        return f'{self.user_profile.user.username}'
+        return f'{self.full_name}'
 

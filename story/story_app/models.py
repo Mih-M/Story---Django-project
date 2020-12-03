@@ -27,11 +27,15 @@ class Story(models.Model):
     image = models.ImageField(upload_to='story_images')
     date = models.DateField(auto_now_add=True)
     published = models.BooleanField(default=False)
-    favorites = models.ManyToManyField(UserProfile, related_name='favorites', blank=True)
-    likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True)
+    favorites = models.ManyToManyField(UserProfile, related_name='favorites', blank=True, through='Favorite')
+    likes = models.ManyToManyField(UserProfile, related_name='likes', blank=True, through='Like')
+    comments = models.ManyToManyField(UserProfile, related_name='comments', blank=True, through='Comment')
 
     def __str__(self):
         return f'{self.title} --by {self.writer.user_profile.user.first_name} {self.writer.user_profile.user.last_name}'
+
+    class Meta:
+        verbose_name_plural = 'Stories'
 
 
 class Comment(models.Model):
@@ -41,5 +45,20 @@ class Comment(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f'Comment for {self.story.title}'
+        return f'{self.story.title}'
 
+
+class Like(models.Model):
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.story.title}'
+
+
+class Favorite(models.Model):
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.story.title}'
