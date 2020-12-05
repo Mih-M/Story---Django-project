@@ -39,7 +39,7 @@ class Story(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     story = models.ForeignKey(Story, on_delete=models.CASCADE)
     content = models.TextField(max_length=500)
     date = models.DateField(auto_now_add=True)
