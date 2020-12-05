@@ -2,8 +2,8 @@
 
 {% block page_content %}
 
-    <form class="c-form" method="post" action="{% url 'sing_in' %}">
-        <h2>Sing in to Story</h2>
+    <form class="c-form" method="post" action="{% url 'sign_in' %}">
+        <h2>Sign in to Story</h2>
 
         <div class="c-form__item">
             <label for="{{ sign_in_form.username.id_for_label }}">Username</label>
@@ -24,6 +24,6 @@
             {% csrf_token %}
         </div>
 
-        <p>Do not have an account? <a href="{% url 'sing_up' %}"> Sign up here</a></p>
+        <p>Do not have an account? <a href="{% url 'sign_up' %}"> Sign up here</a></p>
     </form>
 {% endblock %}

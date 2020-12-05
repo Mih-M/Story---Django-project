@@ -12,4 +12,12 @@
   margin-right: 20px;
 }
 
+.c-writers-buttons-wrapper {
+  overflow: auto;
+  white-space: nowrap;
+  scrollbar-color: #3C403D lightgrey;
+  scrollbar-width: thin;
+  padding-bottom: 30px;
+}
+
 /*# sourceMappingURL=all-stories-styles.css.map */

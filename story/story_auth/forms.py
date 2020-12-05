@@ -31,6 +31,9 @@ class EditProfileForm(forms.Form):
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
     picture = forms.ImageField(required=False)
+    description = forms.CharField(widget=forms.Textarea(
+        attrs={'cols': 20, 'rows': 5}
+    ), max_length=500)
 
 
 

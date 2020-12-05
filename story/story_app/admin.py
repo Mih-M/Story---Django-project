@@ -7,21 +7,18 @@ class LikeInline(admin.StackedInline):
     model = Like
     extra = 1
     classes = ('collapse',)
-    readonly_fields = ('user_profile',)
 
 
 class CommentInline(admin.StackedInline):
     model = Comment
     extra = 1
     classes = ('collapse',)
-    readonly_fields = ('author',)
 
 
 class FavoriteInline(admin.StackedInline):
     model = Favorite
     extra = 1
     classes = ('collapse',)
-    readonly_fields = ('user_profile',)
 
 
 class StoryAdmin(admin.ModelAdmin):
@@ -54,7 +51,6 @@ class StoryAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'writer', 'total_likes', 'total_likes', 'added_to_favorites', 'published']
     list_filter = ['writer']
-    readonly_fields = ['writer']
     search_fields = ['title']
     actions = ['publish']
 

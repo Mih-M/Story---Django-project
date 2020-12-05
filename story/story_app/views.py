@@ -5,13 +5,13 @@ from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 
 from story_app.forms import StoryForm, CommentForm
-from story_app.models import Story
+from story_app.models import Story, Like, Favorite
 from story_auth.models import Writer
 from story_core.decorators import group_required
 
 
 def home(request):
-    latest_stories = Story.objects.filter(published=True).order_by('-date')[:3]
+    latest_stories = Story.objects.filter(published=True).order_by('-date', '-id')[:3]
     context = {
         'latest_stories': latest_stories,
     }
@@ -19,7 +19,7 @@ def home(request):
 
 
 def all_stories(request):
-    stories = Story.objects.filter(published=True).order_by('-date')
+    stories = Story.objects.filter(published=True).order_by('-date', '-id')
     categories = [' '.join(cat[1].split('-')).capitalize() for cat in Story.CATEGORY_CHOICES]
     writers = Writer.objects.filter(approved=True).order_by('user_profile__user__first_name')
 
@@ -39,16 +39,16 @@ def custom_stories(request, username, request_stories):
 
     if is_writer:
         if request_stories == 'my-stories':
-            stories = user_profile.writer.story_set.filter(published=True).order_by('-date')
+            stories = user_profile.writer.story_set.filter(published=True).order_by('-date', '-id')
             header = 'My stories'
         elif request_stories == 'unpublished-stories':
-            stories = user_profile.writer.story_set.filter(published=False).order_by('-date')
+            stories = user_profile.writer.story_set.filter(published=False).order_by('-date', '-id')
             header = 'My stories - unpublished'
     if request_stories == 'favorite-stories':
-        stories = user_profile.favorites.all()
+        stories = user_profile.favorites.filter(published=True).order_by('-date', '-id')
         header = 'Favorite stories'
 
-    categories = [' '.join(cat.split('-')).capitalize() for cat in [s.get_category_display() for s in stories]]
+    categories = [' '.join(cat.split('-')).capitalize() for cat in set(s.get_category_display() for s in stories)]
     writers = set(s.writer for s in stories)
 
     context = {
@@ -99,7 +99,7 @@ def story_details(request, story_pk, story_title):
 
 def writers_profile(request, writer_pk, writers_name):
     writer = Writer.objects.get(pk=writer_pk)
-    stories = writer.story_set.filter(published=True)
+    stories = writer.story_set.filter(published=True).order_by('-date', '-id')
 
     context = {
         'writer': writer,
@@ -155,7 +155,9 @@ def edit_story(request, story_pk, story_title):
         if story_form.is_valid():
             if story_form.cleaned_data['image'] != old_photo:
                 os.remove(old_photo.path)
+
             story_form.save()
+
             story.published = False
             story.save()
 
@@ -227,9 +229,11 @@ def like_story(request, story_pk):
         return redirect('home')
 
     if story in request.user.userprofile.likes.all():
-        request.user.userprofile.likes.remove(story)
+        like = Like.objects.get(story=story, user_profile=request.user.userprofile)
+        like.delete()
     else:
-        request.user.userprofile.likes.add(story)
+        like = Like(story=story, user_profile=request.user.userprofile)
+        like.save()
 
     return redirect('story_details', story_pk, slugify(story.title))
 
@@ -242,9 +246,11 @@ def add_to_favorites(request, story_pk):
         return redirect('home')
 
     if story in request.user.userprofile.favorites.all():
-        request.user.userprofile.favorites.remove(story)
+        favorite = Favorite.objects.get(story=story, user_profile=request.user.userprofile)
+        favorite.delete()
     else:
-        request.user.userprofile.favorites.add(story)
+        favorite = Favorite(story=story, user_profile=request.user.userprofile)
+        favorite.save()
 
     return redirect('story_details', story_pk, slugify(story.title))
 

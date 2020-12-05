@@ -1,11 +1,13 @@
 .c-writer-image {
   clip-path: circle();
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }
 
 .c-writer-pic-wrapper {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .c-approve-btn-form {

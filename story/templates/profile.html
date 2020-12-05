@@ -9,7 +9,8 @@
     <section class="c-profile-info-wrapper">
         <header class="c-profile-pic-wrapper">
             {% if user_profile.profile_picture %}
-            <img src="{{ user_profile.profile_picture.url }}" alt="{{ user_profile.user.username }}'s profile-picture">
+                <img src="{{ user_profile.profile_picture.url }}"
+                     alt="{{ user_profile.user.username }}'s profile-picture">
             {% else %}
                 <img src="{% static 'images/generic_profile_pic.jpg' %}" alt="default profile-picture">
             {% endif %}
@@ -18,6 +19,7 @@
             <main class="c-profile-info-wrapper">
                 <h1>{{ user.first_name }} {{ user.last_name }}</h1>
                 <h2>Writer</h2>
+                <h3>{{ user.userprofile.writer.description|linebreaksbr }}</h3>
             </main>
         {% else %}
             <main class="c-profile-info-wrapper">
@@ -53,7 +55,8 @@
 
             {% include 'parts/stories.html' with stories=unpublished_stories %}
 
-            <footer><a href="{% url 'custom_stories' user.username|slugify 'unpublished-stories' %}">Show all</a></footer>
+            <footer><a href="{% url 'custom_stories' user.username|slugify 'unpublished-stories' %}">Show all</a>
+            </footer>
 
             <h3 class="c-subheading">Published</h3>
 

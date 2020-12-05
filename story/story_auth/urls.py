@@ -6,9 +6,9 @@ from story_auth.views import sign_up, sign_in, sign_out, profile, su_profile, be
     edit_profile, delete_profile
 
 urlpatterns = [
-    path('sign-up/', sign_up, name='sing_up'),
-    path('sign-in/', sign_in, name='sing_in'),
-    path('sign-out/', sign_out, name='sing_out'),
+    path('sign-up/', sign_up, name='sign_up'),
+    path('sign-in/', sign_in, name='sign_in'),
+    path('sign-out/', sign_out, name='sign_out'),
 
     path('become-a-writer/', become_a_writer, name='become_a_writer'),
 

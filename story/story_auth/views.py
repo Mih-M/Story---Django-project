@@ -29,7 +29,7 @@ def sign_up(request):
             user_profile = UserProfile(user=user)
             user_profile.save()
 
-            return redirect('sing_in')
+            return render(request, 'welcome_to_story.html')
 
         context = {
             'sign_up_form': sign_up_form,
@@ -77,10 +77,10 @@ def profile(request, username):
     user_profile = user.userprofile
     is_writer = user.groups.filter(name='Writer').exists()
 
-    my_stories = user_profile.writer.story_set.filter(published=True).order_by('-date')[:3] if is_writer else ''
-    unpublished_stories = user_profile.writer.story_set.filter(published=False).order_by('-date')[:3] \
+    my_stories = user_profile.writer.story_set.filter(published=True).order_by('-date', '-id')[:3] if is_writer else ''
+    unpublished_stories = user_profile.writer.story_set.filter(published=False).order_by('-date', '-id')[:3] \
         if is_writer else ''
-    favorite_stories = user_profile.favorites.all()
+    favorite_stories = user_profile.favorites.filter(published=True).order_by('-date', '-id')[:3]
 
     context = {
         'user_profile': user_profile,
@@ -100,6 +100,7 @@ def edit_profile(request, username):
         form = EditProfileForm(initial={
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
+            'description': request.user.userprofile.writer.description,
         })
 
         context = {
@@ -115,6 +116,9 @@ def edit_profile(request, username):
             request.user.first_name = form.cleaned_data['first_name']
             request.user.last_name = form.cleaned_data['last_name']
             request.user.save()
+            request.user.userprofile.writer.description = form.cleaned_data['description']
+            request.user.userprofile.writer.save()
+
             if form.cleaned_data['picture']:
                 request.user.userprofile.profile_picture = form.cleaned_data['picture']
                 request.user.userprofile.save()
@@ -146,7 +150,7 @@ def delete_profile(request, username):
 
 @group_required()
 def su_profile(request):
-    new_stories = Story.objects.filter(published=False).order_by('-date')
+    new_stories = Story.objects.filter(published=False).order_by('-date', '-id')
     new_writers = Writer.objects.filter(approved=False)
 
     context = {
@@ -180,8 +184,7 @@ def become_a_writer(request):
         application_form = BecomeAWriterForm(request.POST, request.FILES)
 
         if application_form.is_valid():
-            writer = Writer()
-            writer.user_profile = user_profile
+            writer = Writer(user_profile=user_profile)
             writer.save()
             user.first_name = application_form.cleaned_data['first_name']
             user.last_name = application_form.cleaned_data['last_name']
@@ -190,7 +193,7 @@ def become_a_writer(request):
                 user_profile.profile_picture = application_form.cleaned_data['picture']
                 user_profile.save()
 
-            return redirect('home')
+            return render(request, 'application_submitted.html')
 
         context = {
             'application_form': application_form,

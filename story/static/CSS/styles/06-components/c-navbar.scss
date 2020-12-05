@@ -13,13 +13,13 @@
     color: $brown_grey;
     font-size: 20px;
 
-    &.c-sing-in {
+    &.c-sign-in {
       border: 3px solid $green_leaf;
       padding: 5px 10px;
       color: $green_leaf;
     }
 
-    &.c-sing-up {
+    &.c-sign-up {
       border: 3px solid $violet;
       padding: 5px 10px;
       color: $violet;
@@ -34,6 +34,10 @@
     font-family: 'Fredericka the Great', cursive;
     color: $violet;
     transform: rotate(-20deg);
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }
 

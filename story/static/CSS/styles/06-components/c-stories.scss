@@ -120,7 +120,7 @@
   }
 
   .fa-heart.not-in-favorites {
-    color: $olive;
+    color: gray;
 
     &:hover::after {
       @include comment('Add to favorites')
@@ -128,7 +128,7 @@
   }
 
   .fa-heart.in-favorites {
-    color: $green_leaf;
+    color: $violet;
 
     &:hover::after {
       @include comment('Remove from favorites')
@@ -136,12 +136,16 @@
   }
 
   .fa-thumbs-up.not-liked {
+    color: gray;
+
     &:hover::after {
       @include comment('Like')
     }
   }
 
   .fa-thumbs-up.liked {
+    color: $violet;
+
     &:hover::after {
       @include comment('Unlike')
     }

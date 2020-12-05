@@ -12,6 +12,12 @@
 .c-profile-info-wrapper h2 {
   margin-bottom: 50px;
 }
+.c-profile-info-wrapper h3 {
+  margin-bottom: 50px;
+  max-width: 70vw;
+  text-align: center;
+  line-height: 40px;
+}
 
 .c-profile-pic-wrapper {
   text-align: center;

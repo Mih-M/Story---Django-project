@@ -17,3 +17,11 @@
     margin-right: 20px;
   }
 }
+
+.c-writers-buttons-wrapper {
+  overflow: auto;
+  white-space: nowrap;
+  scrollbar-color: $brown_grey lightgrey;
+  scrollbar-width: thin;
+  padding-bottom: 30px;
+}

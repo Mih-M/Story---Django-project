@@ -13,6 +13,7 @@ class UserProfile(models.Model):
 class Writer(models.Model):
     user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
+    description = models.TextField(max_length=500, blank=True)
 
     @property
     def full_name(self):

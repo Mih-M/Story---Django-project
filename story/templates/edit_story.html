@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-    <form class="c-form c-form--long" method="post" action="{% url 'edit_story'  story.id story.title|slugify %}" enctype="multipart/form-data">
+    <form class="c-form c-form--long" method="post" action="{% url 'edit_story'  story.id story.title|slugify %}"
+          enctype="multipart/form-data">
+
         <div class="c-form__item">
             <label for="{{ story_form.title.id_for_label }}">Title</label>
             {{ story_form.title }}
@@ -17,7 +19,7 @@
             {{ story_form.image }}
         </div>
 
-         <div class="c-form__item">
+        <div class="c-form__item">
             <label for="{{ story_form.content.id_for_label }}">Content</label>
             {{ story_form.content }}
         </div>

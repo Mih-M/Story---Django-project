@@ -18,6 +18,11 @@
         </div>
 
         <div class="c-form__item">
+            <label for="{{ form.description.id_for_label }}">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="c-form__item">
             <label for="{{ form.picture.id_for_label }}">Profile picture</label>
             Current:
             {% if user.userprofile.profile_picture %}

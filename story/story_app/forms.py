@@ -6,7 +6,7 @@ from story_app.models import Story, Comment
 class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
-        exclude = ('published', 'writer',)
+        exclude = ('writer', 'date', 'published', 'favorites', 'likes', 'comments')
 
 
 class CommentForm(forms.ModelForm):

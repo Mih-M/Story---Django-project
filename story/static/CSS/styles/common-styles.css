@@ -333,12 +333,12 @@ p {
   color: #3C403D;
   font-size: 20px;
 }
-.c-nav-bar a.c-sing-in {
+.c-nav-bar a.c-sign-in {
   border: 3px solid #39603D;
   padding: 5px 10px;
   color: #39603D;
 }
-.c-nav-bar a.c-sing-up {
+.c-nav-bar a.c-sign-up {
   border: 3px solid #47294F;
   padding: 5px 10px;
   color: #47294F;
@@ -352,6 +352,9 @@ p {
   font-family: "Fredericka the Great", cursive;
   color: #47294F;
   transform: rotate(-20deg);
+}
+.c-logo h2:hover {
+  transform: scale(1.2);
 }
 
 .c-nav {
@@ -615,7 +618,7 @@ p {
   cursor: pointer;
 }
 .c-likes-wrapper .fa-heart.not-in-favorites {
-  color: #A3BCB6;
+  color: gray;
 }
 .c-likes-wrapper .fa-heart.not-in-favorites:hover::after {
   content: "Add to favorites";
@@ -631,7 +634,7 @@ p {
   width: max-content;
 }
 .c-likes-wrapper .fa-heart.in-favorites {
-  color: #39603D;
+  color: #47294F;
 }
 .c-likes-wrapper .fa-heart.in-favorites:hover::after {
   content: "Remove from favorites";
@@ -646,6 +649,9 @@ p {
   transform: translateX(-50%);
   width: max-content;
 }
+.c-likes-wrapper .fa-thumbs-up.not-liked {
+  color: gray;
+}
 .c-likes-wrapper .fa-thumbs-up.not-liked:hover::after {
   content: "Like";
   padding: 5px;
@@ -658,6 +664,9 @@ p {
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
+}
+.c-likes-wrapper .fa-thumbs-up.liked {
+  color: #47294F;
 }
 .c-likes-wrapper .fa-thumbs-up.liked:hover::after {
   content: "Unlike";
