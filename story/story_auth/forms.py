@@ -27,14 +27,18 @@ class BecomeAWriterForm(forms.Form):
     picture = forms.ImageField(required=False)
 
 
-class EditProfileForm(forms.Form):
-    first_name = forms.CharField(required=False)
-    last_name = forms.CharField(required=False)
+class EditProfileWriterForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     picture = forms.ImageField(required=False)
     description = forms.CharField(widget=forms.Textarea(
         attrs={'cols': 20, 'rows': 5}
-    ), max_length=500)
+    ), max_length=500, required=False)
 
 
+class EditProfileUserForm(forms.Form):
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+    picture = forms.ImageField(required=False)
 
 

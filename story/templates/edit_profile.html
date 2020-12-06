@@ -17,10 +17,12 @@
             {{ form.last_name }}
         </div>
 
-        <div class="c-form__item">
-            <label for="{{ form.description.id_for_label }}">Description</label>
-            {{ form.description }}
-        </div>
+        {% if is_writer %}
+            <div class="c-form__item">
+                <label for="{{ form.description.id_for_label }}">Description</label>
+                {{ form.description }}
+            </div>
+        {% endif %}
 
         <div class="c-form__item">
             <label for="{{ form.picture.id_for_label }}">Profile picture</label>
@@ -34,7 +36,7 @@
 
             Change:
             {{ form.picture }}
-            
+
         </div>
 
         <ul class="c-form__item">

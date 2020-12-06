@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 
 from story_app.models import Story
-from story_auth.forms import SignUpForm, SignInForm, BecomeAWriterForm, EditProfileForm
+from story_auth.forms import SignUpForm, SignInForm, BecomeAWriterForm, EditProfileWriterForm, EditProfileUserForm
 from story_auth.models import UserProfile, Writer
 from story_core.decorators import group_required
 
@@ -96,28 +96,42 @@ def profile(request, username):
 @transaction.atomic()
 @login_required()
 def edit_profile(request, username):
+    is_writer = request.user.groups.filter(name='Writer').exists()
+
     if request.method == 'GET':
-        form = EditProfileForm(initial={
+        initial = {
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
-            'description': request.user.userprofile.writer.description,
-        })
+        }
+
+        if is_writer:
+            initial['description'] = request.user.userprofile.writer.description
+            form = EditProfileWriterForm(initial=initial)
+        else:
+            form = EditProfileUserForm(initial=initial)
 
         context = {
             'form': form,
+            'is_writer': is_writer,
         }
 
         return render(request, 'edit_profile.html', context)
     else:
         old_picture = request.user.userprofile.profile_picture
-        form = EditProfileForm(request.POST, request.FILES)
+
+        if is_writer:
+            form = EditProfileWriterForm(request.POST, request.FILES)
+        else:
+            form = EditProfileUserForm(request.POST, request.FILES)
 
         if form.is_valid():
             request.user.first_name = form.cleaned_data['first_name']
             request.user.last_name = form.cleaned_data['last_name']
             request.user.save()
-            request.user.userprofile.writer.description = form.cleaned_data['description']
-            request.user.userprofile.writer.save()
+
+            if is_writer:
+                request.user.userprofile.writer.description = form.cleaned_data['description']
+                request.user.userprofile.writer.save()
 
             if form.cleaned_data['picture']:
                 request.user.userprofile.profile_picture = form.cleaned_data['picture']
