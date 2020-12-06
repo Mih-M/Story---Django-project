@@ -44,7 +44,7 @@ function show_category() {
                 storyWrapperElement.appendChild(x);
             })
         } else {
-            headerElement.textContent = `Results for: ${searchWord}`;
+            headerElement.textContent = `Results for: '${searchWord}'`;
 
             storyWrapperElement.innerHTML = '';
             allStories.forEach(x => {

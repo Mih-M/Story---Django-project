@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'CSS/styles/common-styles.css' %}">
     {% block page-styles %} {% endblock %}
+    <script src="{% static 'scripts/base_script.js' %}"></script>
     {% block page-script %} {% endblock %}
 </head>
 <body>
@@ -57,12 +58,16 @@
 
     </div>
 
+    <a class="c-top-link hide" href="" id="js-top"><i class="fa fa-arrow-circle-up"></i></a>
+
     <main class="c-page-content">
         {% block page_content %}
         {% endblock %}
     </main>
 </div>
-
+<script>
+    scrollToTop();
+</script>
 {% block page-script-function %} {% endblock %}
 </body>
 </html>

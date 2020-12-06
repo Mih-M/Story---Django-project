@@ -484,6 +484,36 @@ p {
   color: #39603D;
 }
 
+.c-top-link {
+  color: #39603D;
+  font-size: 80px;
+  position: fixed;
+  top: 70%;
+  right: 50px;
+  transform: translate(-50%);
+}
+.c-top-link:hover::after {
+  content: "Go to top";
+  padding: 5px;
+  background-color: #3C403D;
+  color: white;
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+.c-top-link.show {
+  visibility: visible;
+  opacity: 1;
+}
+.c-top-link.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .c-stories-section {
   display: flex;
   flex-flow: column wrap;

@@ -99,3 +99,26 @@
     color: $green_leaf;
   }
 }
+
+.c-top-link {
+  color: $green_leaf;
+  font-size: 80px;
+  position: fixed;
+  top: 70%;
+  right: 50px;
+  transform: translate(-50%);
+
+  &:hover::after {
+    @include comment('Go to top')
+  }
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
