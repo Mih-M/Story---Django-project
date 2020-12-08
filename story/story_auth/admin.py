@@ -43,7 +43,19 @@ class WriterAdmin(admin.ModelAdmin):
 
     approve.short_description = 'Approve selected writers'
 
-    actions = ['approve']
+    def disapprove(self, request, queryset):
+        group = Group.objects.get(name='Writer')
+
+        for writer in queryset:
+            writer.user_profile.user.groups.remove(group)
+
+        count = queryset.update(approved=False)
+        message = f'{count} writers have' if count > 1 else f'{count} writer has'
+        self.message_user(request, f'{message} been disapproved.')
+
+    disapprove.short_description = 'Disapprove selected writers'
+
+    actions = ['approve', 'disapprove']
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
