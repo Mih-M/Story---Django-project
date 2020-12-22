@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import auth
 from django.contrib.auth.models import User, Group
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -105,4 +107,8 @@ class AddStoryViewTests(TestCase):
         self.assertEqual(len(self.writer.story_set.all()), 1)
         self.assertIn(Story.objects.get(title='Test Story'), self.writer.story_set.all())
         self.assertFalse(Story.objects.get(title='Test Story').published)
+
+        os.remove(Story.objects.get(title='Test Story').image.path)
+
+
 

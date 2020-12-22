@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import auth
 from django.contrib.auth.models import User, Group
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -32,6 +34,9 @@ class EditStoryViewTests(TestCase):
         self.story.full_clean()
         self.story.published = True
         self.story.save()
+
+    def tearDown(self) -> None:
+        os.remove(self.story.image.path)
 
     def test_edit_story_no_user(self):
         response = self.client.get(f'/edit-story/{self.story.id}/{slugify(self.story.title)}/')
