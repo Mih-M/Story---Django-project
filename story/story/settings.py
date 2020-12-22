@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'story_app',
+    'story_app.tests',
     'story_auth',
 ]
 

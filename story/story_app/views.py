@@ -37,16 +37,19 @@ def custom_stories(request, username, request_stories):
     user_profile = user.userprofile
     is_writer = user.groups.filter(name='Writer').exists()
 
-    if is_writer:
-        if request_stories == 'my-stories':
-            stories = user_profile.writer.story_set.filter(published=True).order_by('-date', '-id')
-            header = 'My stories'
-        elif request_stories == 'unpublished-stories':
-            stories = user_profile.writer.story_set.filter(published=False).order_by('-date', '-id')
-            header = 'My stories - unpublished'
     if request_stories == 'favorite-stories':
         stories = user_profile.favorites.filter(published=True).order_by('-date', '-id')
         header = 'Favorite stories'
+    else:
+        if is_writer:
+            if request_stories == 'my-stories':
+                stories = user_profile.writer.story_set.filter(published=True).order_by('-date', '-id')
+                header = 'My stories'
+            elif request_stories == 'unpublished-stories':
+                stories = user_profile.writer.story_set.filter(published=False).order_by('-date', '-id')
+                header = 'My stories - unpublished'
+        else:
+            return redirect('home')
 
     categories = [' '.join(cat.split('-')).capitalize() for cat in set(s.get_category_display() for s in stories)]
     writers = set(s.writer for s in stories)
@@ -125,7 +128,7 @@ def add_story(request):
             story.writer = request.user.userprofile.writer
             story.save()
 
-            return redirect('profile', request.user.username)
+            return redirect('profile', slugify(request.user.username))
 
         context = {
             'story_form': story_form,
@@ -187,7 +190,7 @@ def delete_story(request, story_pk, story_title):
     else:
         story.delete()
 
-        return redirect('profile', request.user.username)
+        return redirect('profile', slugify(request.user.username))
 
 
 @group_required()
